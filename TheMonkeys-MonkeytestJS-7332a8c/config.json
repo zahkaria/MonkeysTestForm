@@ -1,0 +1,34 @@
+{
+    "facebookId": "000000000000000",
+
+    "local": {
+        "env": ["localhost"]
+    },
+    "stage": {
+        "env": ["STAGE URL OR PART OF"],
+        "facebookId": "222222222222222"
+    },
+    "beta": {
+        "env": ["BETA URL OR PART OF"],
+        "facebookId": "33333333333333333"
+    },
+    "production": {
+        "env": ["PRODUCTION URL OR PART OF"],
+        "facebookId": "4444444444444444444"
+    },
+
+    "globalTests": [
+        "global/not_server_error.js",
+        "global/is_html_w3c_valid.js",
+        "global/has_utf8_metatag.js"
+    ],
+    "pages": [
+        {
+            "url": "./"
+        },
+        {
+            "url": "html5-boilerplate-4.3.0/index.html",
+            "tests": [ "page/formTest_page_test.js" ]
+        }
+    ]
+}

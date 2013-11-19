@@ -14,7 +14,12 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+
+
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <style>
+            form > * { float: left; clear: both };
+        </style>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -22,21 +27,101 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+        <form name="demo" id='formTest' action="formTest.html" method='get'>
+            All Fields with * required
+            <label for='firstname'>First Name *</label>
+            <input name='firstname' id='firstname' size='35' maxlength='50' required placeholder='First Name'>
+
+            <label for='surname'>Surname *</label>
+            <input name='surname' id='surname' size='35' maxlength='50' type='text' required placeholder='Surname'>
+
+            <label for='email'>Email address *</label>
+            <input name='email' id='email' size='35' maxlength='50' type='email' required placeholder='Email address'>
+
+            <label for='contactNumber'>Daytime contact number *</label>
+            <input name='contactNumber' id='contactNumber' size='35' maxlength='50' type='text' required placeholder='Daytime Contact Number'>
+
+            <label for='address'>Address *</label>
+            <input name='address' id='address' size='35' maxlength='50' type='text' required placeholder='Address'>
+
+            <label for='suburb'>Suburb *</label>
+            <input name='suburb' id='suburb' size='35' maxlength='50' type='text' required placeholder='Suburb'>
+
+            <label for='state'>State</label>
+            <select name='state' id='state' required placeholder='State'>
+                  <option value=''>State</option>
+                  <option value='ACT'>ACT</option>
+                  <option value='NSW'>NSW</option>
+                  <option value='NT'>NT</option>
+                  <option value='SA'>SA</option>
+                  <option value='TAS'>TAS</option>
+                  <option value='VIC'>VIC</option>
+                  <option value='WA'>WA</option>
+            </select>
+
+            <label for='postcode'>Postcode *</label>
+            <input name='postcode' id='postcode' size='4' maxlength='4' type='number' required placeholder='Postcode'>
+
+            <label for='enquiryType'>Enquiry type *</label>
+            <select name='enquiryType' id='enquiryType' required placeholder='Enquiry type'>
+                  <option value='general'>General enquiry</option>
+                  <option value='productFeedback'>Product feedback or enquiry</option>
+                  <option value='productComplaint'>Product complaint</option>
+            </select>
+
+                <label for='productName'> Product name</label>
+                <input name='productName' id='productName' size='35' maxlength='50' placeholder='Product Name'>
+
+                <label for='productSize'>Product size</label>
+                <input name='productSize' id='productSize' size='35' maxlength='50' placeholder='Product Size'>
+
+                <label for='usebyDate'>Use-by date</label>
+                <input name='usebyDate' id='usebyDate' size='35' maxlength='50' placeholder='Use-by Date'>
+
+                <label for='batchCode'>Batch code</label>
+                <input name='batchCode' id='batchCode' size='35' maxlength='50' placeholder='Batch Code'>
+            
+            <label for='batchCode'>Enquiry</label>
+            <textarea rows="4" cols="50"></textarea>
+            <input type='submit' value='submit'>
+        </form>
+
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
         <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
+        /* Step 4
+         * Using javascript, but without using JQuery, write some client side validation to ensure
+         * that, if the enquiry type is "Product Complaint", product name, product size, use-by date and 
+         * batch code are not empty.
+         */
+          var enquiryType = document.getElementById('enquiryType');
+
+          enquiryType.onfocus = function(){
+              console.log('onfocus enquiryType');
+              document.getElementById('productName').removeAttribute("required");
+              document.getElementById('productSize').removeAttribute("required");
+              document.getElementById('usebyDate').removeAttribute("required");
+              document.getElementById('batchCode').removeAttribute("required");
+          };
+
+          enquiryType.onblur = function(){
+            console.log('onblur enquiryType');
+            var selectedIndex = this.options.selectedIndex
+            var value = this.options[selectedIndex].value;
+
+            if (value == 'productComplaint'){
+              document.getElementById('productName').setAttribute("required", "true");
+              document.getElementById('productSize').setAttribute("required", "true");
+              document.getElementById('usebyDate').setAttribute("required", "true");
+              document.getElementById('batchCode').setAttribute("required", "true");
+            };
+          };
+
         </script>
     </body>
 </html>
