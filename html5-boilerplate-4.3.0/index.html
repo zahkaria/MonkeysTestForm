@@ -123,5 +123,45 @@
           };
 
         </script>
+        <script>
+        /* Step 3 
+         * Incase monkeyTestJS doesn't validate using html5 i've added yepnope and vaidation JS
+         */
+         (function ($) {
+            
+            // set and cache some variables, change var forms to whatever forms you want to validate
+            var forms = $('form'),
+                formsCount = forms.length,
+                items = forms.find('input[required]'),
+                count = items.length;
+
+            // check for "required" input support with modernizr
+            if (Modernizr.input.required) {
+                // do something else, maybe customize the output messages?
+
+            } else {
+                
+                // loop though each required input and set the required and type class jQuery validate needs
+                for (var i = 0; i < count; i += 1) {
+                    var obj = items[i];
+                    $(obj).attr('class', 'required ' + obj.getAttribute('type')).removeAttr('required');
+                };
+                
+                // after the classes are set, load in the plugin with yepnope , you can do this with Modernizr.load as well
+                yepnope([{
+                    load: 'js/jquery.validate.min.js',
+                    complete: function () {
+                    
+                        // after the plugin is loaded, call the method on each form listed at the top
+                        for (var i = 0; i < formsCount; i += 1) {
+                            $(forms[i]).validate();
+                        }
+                    }
+                }]);
+
+            } // if required supported
+
+        }(jQuery));
+        </script>
     </body>
 </html>
